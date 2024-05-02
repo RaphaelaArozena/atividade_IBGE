@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+@Injectable({
+  providedIn: 'root'
 })
-export class AppComponent {
-  title = 'ibgevf';
+export class IbgeService {
+
+  constructor(private http: HttpClient) { }
+
+  getEstados(): Observable<any[]> {
+    return this.http.get<any[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+  }
 }
